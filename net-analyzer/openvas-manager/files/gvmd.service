@@ -1,0 +1,19 @@
+[Unit]
+Description=OpenVAS Manager
+After=network.target
+After=openvas.service
+Wants=openvas.service
+Before=gsa.service
+
+[Service]
+Type=forking
+EnvironmentFile=-/etc/openvas/sysconfig/gvmd-daemon.conf
+ExecStart=/usr/sbin/gvmd $GVM_OPTIONS $GVM_PORT $GVM_LISTEN_ADDRESS $GVM_GNUTLS_PRIORITIES 
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+User=gvm
+Group=openvas
+TimeoutSec=1200
+
+[Install]
+WantedBy=multi-user.target
