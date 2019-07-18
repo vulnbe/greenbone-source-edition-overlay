@@ -5,7 +5,7 @@
 name="OpenVAS Scanner"
 command="/usr/sbin/openvassd"
 command_args="${OPENVAS_SCANNER_OPTIONS} ${OPENVAS_SCANNER_LISTEN_SOCKET}"
-pidfile="/var/run/openvassd.pid"
+pidfile="/var/run/gvm/openvassd.pid"
 command_background="true"
 
 depend() {
@@ -14,7 +14,7 @@ depend() {
 }
 
 start_pre() {
-	checkpath --directory --mode 0775 --quiet /var/cache/openvas
+	checkpath --directory --mode 0775 --quiet /var/cache/openvas /var/run/gvm
 }
 
 create_cache() {

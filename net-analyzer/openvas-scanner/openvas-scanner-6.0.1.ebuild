@@ -4,35 +4,30 @@
 EAPI=7
 
 CMAKE_MAKEFILE_GENERATOR="emake"
-inherit cmake-utils
-MY_PN="gvm-libs"
+inherit cmake-utils systemd user
+MY_PN="openvas"
+S="${WORKDIR}/${MY_PN}-${PV}"
 
-DESCRIPTION="A remote security scanner for Linux (openvas-libraries)"
+DESCRIPTION="A remote security scanner for Linux (OpenVAS-scanner)"
 HOMEPAGE="http://www.openvas.org/"
 SRC_URI="https://github.com/greenbone/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
-IUSE="extras ldap radius"
+IUSE="extras"
 
 DEPEND="
-	app-crypt/gpgme:=
-	dev-libs/hiredis
+	dev-db/redis
 	dev-libs/libgcrypt:0=
-	dev-libs/libksba
-	dev-perl/UUID
-	net-analyzer/net-snmp
+	>=net-analyzer/openvas-libraries-10.0.1
 	net-libs/gnutls:=[tools]
-	net-libs/libpcap
 	net-libs/libssh:=
-	sys-libs/zlib
-	extras? ( dev-perl/CGI )
-	ldap? ( net-nds/openldap )
-	radius? ( net-dialup/freeradius-client )"
+	extras? ( dev-perl/CGI )"
 
 RDEPEND="
-	${DEPEND}"
+	${DEPEND}
+	!net-analyzer/openvas-tools"
 
 BDEPEND="
 	sys-devel/bison
@@ -44,20 +39,10 @@ BDEPEND="
 		  dev-perl/SQL-Translator
 	)"
 
-PATCHES=(
-	"${FILESDIR}/${P}-gcc8.patch"
-	"${FILESDIR}/${P}-netsnmp.patch"
-	"${FILESDIR}/${P}-cachedir.patch"
-	"${FILESDIR}/${P}-rundir.patch"
-	"${FILESDIR}/${P}-underlinking.patch"
-	"${FILESDIR}/${P}-rpath.patch"
-)
-
-BUILD_DIR="${WORKDIR}/${MY_PN}-${PV}_build"
-S="${WORKDIR}/${MY_PN}-${PV}"
-
 src_prepare() {
 	cmake-utils_src_prepare
+	# Fix for correct FHS/Gentoo policy paths for 5.1.3
+	sed -i "s*/doc/openvas-scanner/*/doc/openvas-scanner-${PV}/*g" "$S"/src/CMakeLists.txt || die
 	if use extras; then
 		doxygen -u "$S"/doc/Doxyfile_full.in || die
 	fi
@@ -68,8 +53,7 @@ src_configure() {
 		"-DCMAKE_INSTALL_PREFIX=${EPREFIX}/usr"
 		"-DLOCALSTATEDIR=${EPREFIX}/var"
 		"-DSYSCONFDIR=${EPREFIX}/etc"
-		$(usex ldap -DBUILD_WITHOUT_LDAP=0 -DBUILD_WITHOUT_LDAP=1)
-		$(usex radius -DBUILD_WITHOUT_RADIUS=0 -DBUILD_WITHOUT_RADIUS=1)
+		"-DCMAKE_BUILD_TYPE=Release"
 	)
 	cmake-utils_src_configure
 }
@@ -86,9 +70,24 @@ src_compile() {
 src_install() {
 	cmake-utils_src_install
 
-	insinto /usr/share/openvas
-	doins "${FILESDIR}"/OPENVAS.gentoo
+	insinto /etc/openvas/
+	doins "${FILESDIR}"/openvassd.conf "${FILESDIR}"/openvassd_log.conf "${FILESDIR}"/redis.conf.example
 
-	keepdir /var/lib/openvas/gnupg
-	keepdir /var/log/openvas
+	insinto /etc/openvas/sysconfig/
+	doins "${FILESDIR}"/${MY_PN}-daemon.conf
+
+	newinitd "${FILESDIR}/${MY_PN}.init" ${MY_PN}
+	newconfd "${FILESDIR}/${MY_PN}-daemon.conf" ${MY_PN}
+
+	insinto /etc/logrotate.d/
+	newins "${FILESDIR}/${MY_PN}.logrotate" ${MY_PN}
+
+	systemd_newtmpfilesd "${FILESDIR}/${MY_PN}.tmpfiles.d" ${MY_PN}.conf
+	systemd_dounit "${FILESDIR}"/${MY_PN}.service
+
+	keepdir /var/lib/gvm/plugins /var/lib/gvm/gnupg /var/log/openvas
+}
+
+pkg_postinst() {
+	enewgroup openvas 501
 }

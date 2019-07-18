@@ -1,4 +1,4 @@
-# OpenVAS 9.0.0 for Gentoo/Linux
+# OpenVAS 10.0.1 for Gentoo/Linux
 
 This is not official Gentoo/Linux OpenVAS package.
 
@@ -7,15 +7,14 @@ https://packages.gentoo.org/packages/net-analyzer/openvas
 
 ## Versions
 
-    openvas                      9.0.0 (stable, latest)
+    openvas                      10.0.1 (stable, latest)
 
 ---------------------------------------
 
-    openvas-libraries            9.0.3 (stable, latest)
-    openvas-scanner              5.1.3 (stable, latest)
-    openvas-manager              7.0.3 (stable, latest)
-    greenbone-security-assistant 7.0.3 (stable, latest)
-    gvm-tools                    1.4.1 (stable, latest)
+    openvas-libraries            10.0.1 (stable, latest)
+    openvas-scanner              6.0.1 (stable, latest)
+    openvas-manager              8.0.1 (stable, latest)
+    greenbone-security-assistant 8.0.1 (stable, latest)
     ospd                         1.3.2 (stable, latest)
 
 ## What is OpenVAS
@@ -36,17 +35,21 @@ Alternatively you can create a /etc/portage/repos.conf/openvas-overlay.conf file
     [openvas-overlay]
     location = /usr/local/portage/openvas-overlay
     sync-type = git
-    sync-uri = https://github.com/hsntgm/openvas-9-gentoo-overlay.git
+    sync-uri = https://github.com/vulnbe/openvas-gentoo-overlay.git
     priority = 9999
 
 Then run:
 
-    sync repo       --> emerge --sync or eix-sync or emaint -a sync
-    install package --> emerge --ask net-analyzer/openvas
+sync repo       --> `emerge --sync or eix-sync or emaint -a sync`
+install package --> `emerge --ask net-analyzer/openvas`
+
+You must disable network-sandbox in order to install GSA:
+    
+    FEATURES="-network-sandbox" emerge greenbone-security assistant
 
 ### via layman
 
-    layman -o https://raw.github.com/hsntgm/openvas-9-gentoo-overlay/master/repositories.xml -f -a openvas-overlay
+    layman -o https://raw.github.com/vulnbe/openvas-gentoo-overlay/master/repositories.xml -f -a openvas-overlay
 
 Then run:
 
@@ -54,18 +57,31 @@ Then run:
 
 ## Use Flags
 
-     IUSE="extras cli gsa ospd ldap radius"
+    IUSE="extras gsa ospd ldap radius"
 
- - extras     --> Required for docs, pdf results and fonts | Recommended
- - cli        --> Command Line Interfaces for OpenVAS-Scanner
- - gsa        --> Greenbone Security Agent (WebUI)
- - ospd       --> Scanner wrappers which share the same communication protocol
- - ldap       --> LDAP Support for Openvas-Libraries
- - radius     --> Radius Support for OpenVAS-Libraries
+- extras     --> Required for docs, pdf results and fonts | Recommended
+- gsa        --> Greenbone Security Agent (WebUI)
+- ospd       --> Scanner wrappers which share the same communication protocol
+- ldap       --> LDAP Support for Openvas-Libraries
+- radius     --> Radius Support for OpenVAS-Libraries
+- postgresql --> PostgreSQL backend
 
-## Scripts
+## Postgres preparation
 
-    Inspect the scripts. You never blindly run scripts you
-    downloaded from the Internet, do you?
-    
-https://github.com/hsntgm/openvas-9-scripts
+    su - postgres -c "createuser -DRS gvm";
+    su - postgres -c "createdb -O gvm gvmd";
+    su - postgres -c "psql gvmd -c 'create role dba with superuser noinherit; grant dba to gvm; create extension \"uuid-ossp\";'";
+
+## Create user
+
+    su -s /bin/sh gvm -c "/usr/sbin/gvmd --create-user=admin --password=admin"
+
+## Issues
+
+- GVM stucks on NVT cache update
+
+    psql -q --pset pager=off gvmd -c "DELETE FROM meta where name = 'nvts_feed_version' OR name = 'nvts_check_time';"
+
+- OpenVAS chache corruption
+
+    redis-cli -s /tmp/redis.sock FLUSHALL

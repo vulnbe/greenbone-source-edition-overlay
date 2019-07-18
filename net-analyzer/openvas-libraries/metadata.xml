@@ -2,8 +2,8 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>hasan.calisir@psauxit.com</email>
-		<name>Hasan ÇALIŞIR</name>
+		<email>a@vuln.be</email>
+		<name>Alexey Pronin</name>
 	</maintainer>
 	<maintainer type="project">
 		<email>proxy-maint@gentoo.org</email>

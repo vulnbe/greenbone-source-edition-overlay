@@ -1,5 +1,5 @@
 # logrotate for openvas security agent
-/var/log/openvas/gsad.log {
+/var/log/gsa/gsad.log {
 	daily
 	rotate 7
 	compress

@@ -30,7 +30,7 @@ otherwise you can change port to 443 or 80.
 -----------------------------------------------------------------
 ----------ENVIRONMENT SETTINGS FOR SYSTEMD & OPEN-RC-------------
 -----------------------------------------------------------------
-'openvas-scanner-daemon.conf'  
+'openvas-daemon.conf'  
 --> OpenVAS Scanner systemd daemon settings
 --> Installed in /etc/openvas/sysconfig
 
@@ -75,13 +75,13 @@ otherwise you can change port to 443 or 80.
 'openvassd --foreground --only-cache'
 --> Generate initial NVT cache and quit
 
-'rc-service openvas-scanner start or systemctl start openvas-scanner' 
+'rc-service openvas start or systemctl start openvas' 
 --> Start OpenVAS-Scanner
 
-'openvasmd --rebuild --progress'
+'gvmd --rebuild --progress'
 --> Initialize the Database
 
-'openvasmd --create-user=admin --role=Admin'
+'gvmd --create-user=admin --role=Admin'
 --> Create User for WEBUI.Save your password
 
 'rc-service gvmd start or systemctl start gvmd'

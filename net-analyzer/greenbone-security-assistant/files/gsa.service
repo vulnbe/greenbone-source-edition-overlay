@@ -1,14 +1,13 @@
 [Unit]
-Description=OpenVAS Manager
+Description=Greenbone Security Assistant
 After=network.target
-After=openvas-scanner.service
 After=gvmd.service
 Wants=gvmd.service
 
 [Service]
 Type=forking
 EnvironmentFile=-/etc/openvas/sysconfig/gsa-daemon.conf
-ExecStart=/usr/sbin/gsad $OPENVAS_SECURITY_ASSISTANT_OPTIONS $OPENVAS_SECURITY_ASSISTANT_LISTEN_ADDRESS $OPENVAS_SECURITY_ASSISTANT_LISTEN_PORT $OPENVAS_SECURITY_ASSISTANT_MANAGER_LISTEN_ADDRESS $OPENVAS_SECURITY_ASSISTANT_MANAGER_LISTEN_PORT $OPENVAS_SECURITY_ASSISTANT_GNUTLS_PRIORITIES $OPENVAS_REVERSE_PROXY
+ExecStart=/usr/sbin/gsad $GSA_OPTIONS $GSA_LISTEN_ADDRESS $GSA_LISTEN_PORT $GSA_MANAGER_LISTEN_ADDRESS $GSA_MANAGER_LISTEN_PORT $GSA_GNUTLS_PRIORITIES
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=mixed
 User=root

@@ -1,5 +1,5 @@
 # logrotate for openvas scanner
-/var/log/openvas/openvassd.messages {
+/var/log/openvas/openvassd.log {
         rotate 4
         weekly
         compress

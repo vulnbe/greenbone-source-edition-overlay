@@ -11,17 +11,23 @@ HOMEPAGE="http://www.openvas.org/"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
-IUSE="+cli +extras +gsa ldap +ospd radius"
+IUSE="+extras +gsa ldap +ospd radius +postgresql"
 
 RDEPEND="
-	>=net-analyzer/openvas-libraries-9.0.3[extras?]
-	>=net-analyzer/openvas-manager-7.0.3[extras?]
-	>=net-analyzer/openvas-scanner-5.1.3[extras?]
-	cli? ( >=net-analyzer/gvm-tools-1.4.1 )
-	gsa? ( >=net-analyzer/greenbone-security-assistant-7.0.3[extras?] )
-	ldap? ( >=net-analyzer/openvas-libraries-9.0.3[ldap] )
+	>=net-analyzer/openvas-libraries-10.0.1[extras?]
+	>=net-analyzer/openvas-scanner-6.0.1[extras?]
+	extras? (
+		postgresql? ( >=net-analyzer/openvas-manager-8.0.1[extras,postgresql] )
+		!postgresql? ( >=net-analyzer/openvas-manager-8.0.1[extras] )
+	)
+	!extras? ( 
+		postgresql? ( >=net-analyzer/openvas-manager-8.0.1[postgresql] )
+		!postgresql? ( >=net-analyzer/openvas-manager-8.0.1 )
+	)
+	gsa? ( >=net-analyzer/greenbone-security-assistant-8.0.1[extras?] )
+	ldap? ( >=net-analyzer/openvas-libraries-10.0.1[ldap] )
 	ospd? ( >=net-analyzer/ospd-1.3.2[extras?] )
-	radius? ( >=net-analyzer/openvas-libraries-9.0.3[radius] )"
+	radius? ( >=net-analyzer/openvas-libraries-10.0.1[radius] )"
 
 pkg_postinst() {
 	elog "----------------------------IMPORTANT----------------------------"
