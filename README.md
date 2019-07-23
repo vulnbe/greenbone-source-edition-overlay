@@ -82,8 +82,9 @@ Then run:
 
 - GVM stucks on NVT cache update
 
-    psql -q --pset pager=off gvmd -c "DELETE FROM meta where name = 'nvts_feed_version' OR name = 'nvts_check_time';"
+`psql -q --pset pager=off gvmd -c "DELETE FROM meta where name = 'nvts_feed_version' OR name = 'nvts_check_time';"`
 
 - OpenVAS cache corruption
 
-    redis-cli -s /tmp/redis.sock FLUSHALL
+`redis-cli -s /tmp/redis.sock FLUSHALL`
+
