@@ -1,4 +1,4 @@
-# OpenVAS 10.0.1 for Gentoo/Linux
+# OpenVAS / Greenbone 10.0.1 for Gentoo/Linux
 
 This is not official Gentoo/Linux OpenVAS package.
 
@@ -66,13 +66,15 @@ Then run:
 - radius     --> Radius Support for OpenVAS-Libraries
 - postgresql --> PostgreSQL backend
 
-## Postgres preparation
+## PostgreSQL configuration
 
     su - postgres -c "createuser -DRS gvm";
     su - postgres -c "createdb -O gvm gvmd";
     su - postgres -c "psql gvmd -c 'create role dba with superuser noinherit; grant dba to gvm; create extension \"uuid-ossp\";'";
+    
+[Read more](https://github.com/greenbone/gvmd/blob/master/INSTALL.md#configure-postgresql-database-backend)
 
-## Create user
+## User management
 
     su -s /bin/sh gvm -c "/usr/sbin/gvmd --create-user=admin --password=admin"
 
@@ -82,6 +84,6 @@ Then run:
 
     psql -q --pset pager=off gvmd -c "DELETE FROM meta where name = 'nvts_feed_version' OR name = 'nvts_check_time';"
 
-- OpenVAS chache corruption
+- OpenVAS cache corruption
 
     redis-cli -s /tmp/redis.sock FLUSHALL
