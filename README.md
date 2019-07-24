@@ -35,8 +35,9 @@ Alternatively you can create a /etc/portage/repos.conf/openvas-overlay.conf file
     [openvas-overlay]
     location = /usr/local/portage/openvas-overlay
     sync-type = git
-    sync-uri = https://github.com/vulnbe/openvas-gentoo-overlay.git
-    priority = 9999
+    sync-uri = git://github.com/vulnbe/openvas-gentoo-overlay.git
+    priority = 50
+    auto-sync = Yes
 
 Then run:
 
