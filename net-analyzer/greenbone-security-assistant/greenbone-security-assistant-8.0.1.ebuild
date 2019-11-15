@@ -43,6 +43,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${MY_PN}-${PV}-remove-static.patch
+	"${FILESDIR}"/${MY_PN}-${PV}-xss.patch
 )
 
 BUILD_DIR="${WORKDIR}/${MY_PN}-${PV}_build"
