@@ -1,0 +1,5 @@
+# OpenVAS Scanner command args
+
+OSPD_USER=gvm
+OSPD_GROUP=gvm
+OSPD_OPENVAS_OPTIONS=""

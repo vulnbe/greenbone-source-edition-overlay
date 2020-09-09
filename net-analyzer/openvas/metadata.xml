@@ -5,16 +5,16 @@
 		<email>a@vuln.be</email>
 		<name>Alexey Pronin</name>
 	</maintainer>
-	<maintainer type="project">
-		<email>proxy-maint@gentoo.org</email>
-		<name>Proxy Maintainers</name>
-	</maintainer>
 	<use>
-		<flag name="extras">Extra fonts, pdf results and html docs support</flag>
-		<flag name="gsa">Greenbone Security Assistant (WebUI) through <pkg>net-analyzer/greenbone-security-assistant</pkg></flag>
-		<flag name="ospd">Enable support for scanner wrappers through <pkg>net-analyzer/ospd</pkg></flag>
-		<flag name="ldap">Enable support for ldap through <pkg>net-nds/openldap</pkg></flag>
-		<flag name="radius">Enable support for radius through <pkg>net-dialup/freeradius-client</pkg></flag>
-		<flag name="postgresql">Enable support for PostgreSQL backend</flag>
+		<flag name="cron">Install a cron job to update GVM's feed daily.</flag>
+		<flag name="extras">Html docs support</flag>
 	</use>
+	<longdescription lang="en">
+	Open Vulnerability Assessment System (OpenVAS) Scanner is the Greenbone Vulnerability Management (GVM) Solution.
+	It is used for the Greenbone Security Manager appliances and is a full-featured scan engine that executes a continuously 
+	updated and extended feed of Network Vulnerability Tests (NVTs).
+	</longdescription>
+	<upstream>
+		<remote-id type="github">greenbone/openvas-scanner</remote-id>
+	</upstream>
 </pkgmetadata>

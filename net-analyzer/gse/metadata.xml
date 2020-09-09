@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>a@vuln.be</email>
+		<name>Alexey Pronin</name>
+	</maintainer>
+	<use>
+		<flag name="gsa">Greenbone Security Assistant (WebUI)</flag>
+		<flag name="openvas">OSPD OpenVAS scanner</flag>
+    <flag name="cron">A cron job to update GSE's vulnerability feeds daily</flag>
+		<flag name="extras">Extra fonts, pdf-results! and html docs support</flag>
+    <flag name="ldap">LDAP support</flag>
+		<flag name="radius">Radius support</flag>
+	</use>
+	<longdescription lang="en">
+	GSE previously named OpenVAS stands for Open Vulnerability Assessment System and is a network security scanner 
+	with associated tools like a graphical user front-end. 
+	The core component is a server with a set of network vulnerability tests (NVTs) to detect security problems in remote systems and applications.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">greenbone</remote-id>
+	</upstream>
+</pkgmetadata>

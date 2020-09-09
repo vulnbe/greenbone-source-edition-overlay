@@ -1,0 +1,114 @@
+diff --git a/src/manage_pg_server.c b/src/manage_pg_server.c
+index f37237be0..062348640 100644
+--- a/src/manage_pg_server.c
++++ b/src/manage_pg_server.c
+@@ -128,6 +128,66 @@ sql_hosts_contains (PG_FUNCTION_ARGS)
+     }
+ }
+ 
++/**
++ * @brief Define function for Postgres.
++ */
++PG_FUNCTION_INFO_V1 (sql_level_max_severity);
++
++/**
++ * @brief Dummy function to allow restoring gvmd-9.0 dumps.
++ *
++ * @deprecated This function will be removed once direct migration
++ *             compatibility with gvmd 9.0 is no longer required
++ *
++ * @return Postgres NULL Datum.
++ */
++ __attribute__((deprecated))
++Datum
++sql_level_max_severity (PG_FUNCTION_ARGS)
++{
++  PG_RETURN_NULL ();
++}
++
++/**
++ * @brief Define function for Postgres.
++ */
++PG_FUNCTION_INFO_V1 (sql_level_min_severity);
++
++/**
++ * @brief Dummy function to allow restoring gvmd-9.0 dumps.
++ *
++ * @deprecated This function will be removed once direct migration
++ *             compatibility with gvmd 9.0 is no longer required
++ *
++ * @return Postgres NULL Datum.
++ */
++ __attribute__((deprecated))
++Datum
++sql_level_min_severity (PG_FUNCTION_ARGS)
++{
++  PG_RETURN_NULL ();
++}
++
++/**
++ * @brief Define function for Postgres.
++ */
++PG_FUNCTION_INFO_V1 (sql_next_time);
++
++/**
++ * @brief Dummy function to allow restoring gvmd-9.0 dumps.
++ *
++ * @deprecated This function will be removed once direct migration
++ *             compatibility with gvmd 9.0 is no longer required
++ *
++ * @return Postgres NULL Datum.
++ */
++ __attribute__((deprecated))
++Datum
++sql_next_time (PG_FUNCTION_ARGS)
++{
++  PG_RETURN_NULL ();
++}
++
+ /**
+  * @brief Define function for Postgres.
+  */
+@@ -298,3 +358,23 @@ sql_regexp (PG_FUNCTION_ARGS)
+       PG_RETURN_BOOL (ret);
+     }
+ }
++
++/**
++ * @brief Define function for Postgres.
++ */
++PG_FUNCTION_INFO_V1 (sql_valid_db_resource_type);
++
++/**
++ * @brief Dummy function to allow restoring gvmd-9.0 dumps.
++ *
++ * @deprecated This function will be removed once direct migration
++ *             compatibility with gvmd 9.0 is no longer required
++ *
++ * @return Postgres NULL Datum.
++ */
++ __attribute__((deprecated))
++Datum
++sql_valid_db_resource_type (PG_FUNCTION_ARGS)
++{
++  PG_RETURN_NULL ();
++}
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index bacd95a77..48b9de277 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
+ 
+ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+ 
++## [20.8.1] (unreleased)
++
++### Fixed
++- Add dummy functions to allow restoring old dumps [#1251](https://github.com/greenbone/gvmd/pull/1251)
++
++[20.8.1]: https://github.com/greenbone/gvmd/compare/v20.8.0...gvmd-20.08
++
+ ## [20.8.0] (2020-08-11)
+ 
+ ### Added
