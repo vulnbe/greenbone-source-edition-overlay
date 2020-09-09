@@ -1,0 +1,28 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+: ${GVMD_USER:=gvm}
+: ${GVMD_GROUP:=gvm}
+: ${GVMD_TIMEOUT:=30}
+
+RUN_DIR="/var/run/${GVMD_USER}"
+LOG_DIR="/var/log/${GVMD_USER}"
+
+name="Greenbone Vulnerability Manager"
+command=/usr/bin/gvmd
+command_args="--foreground ${GVMD_OPTIONS}"
+command_background="true"
+command_user="${GVMD_USER}:${GVMD_GROUP}"
+pidfile="${RUN_DIR}/gvmd.pid"
+retry="${GVMD_TIMEOUT}"
+
+depend() {
+	after bootmisc
+	need localmount net postgresql ospd-openvas
+}
+
+start_pre() {
+	checkpath -d -o "${GVMD_USER}:${GVMD_GROUP}" -m775 "${RUN_DIR}"
+  checkpath -d -o "${GVMD_USER}:${GVMD_GROUP}" -m775 "${LOG_DIR}"
+}

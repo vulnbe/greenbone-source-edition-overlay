@@ -2,14 +2,14 @@
 <!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
 <repositories xmlns="" version="1.0">
   <repo quality="experimental" status="unofficial">
-    <name><![CDATA[openvas-overlay]]></name>
-    <description lang="en"><![CDATA[OpenVAS-9.0.0 full-featured vulnerability scanner]]></description>
-    <homepage>https://github.com/vulnbe/openvas-gentoo-overlay</homepage>
+    <name><![CDATA[greenbone-source-edition-overlay]]></name>
+    <description lang="en"><![CDATA[GSE - Greenbone Source Edition]]></description>
+    <homepage>https://github.com/vulnbe/greenbone-source-edition-gentoo-overlay</homepage>
     <owner type="person">
       <email>a@vuln.be</email>
       <name><![CDATA[Alexey Pronin]]></name>
     </owner>
-    <source type="git">git://github.com/vulnbe/openvas-gentoo-overlay.git</source>
-    <feed>https://github.com/vulnbe/openvas-gentoo-overlay/commits/master.atom</feed>
+    <source type="git">git://github.com/vulnbe/greenbone-source-edition-gentoo-overlay.git</source>
+    <feed>https://github.com/vulnbe/greenbone-source-edition-gentoo-overlay/commits/master.atom</feed>
   </repo>
 </repositories>

@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+# Copyright 2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+: ${OSPD_USER:=gvm}
+: ${OSPD_GROUP:=gvm}
+
+RUN_DIR="/var/run/${OSPD_USER}"
+LOG_DIR="/var/log/${OSPD_USER}"
+
+name="remotely control an OpenVAS Scanner"
+command=/usr/bin/ospd-openvas
+pidfile="${RUN_DIR}/${RC_SVCNAME}.pid"
+command_args="${OSPD_OPENVAS_OPTIONS} \
+	--pid-file ${pidfile} \
+  --lock-file-dir ${RUN_DIR} \
+  --unix-socket ${RUN_DIR}/${RC_SVCNAME}.sock \
+  --log-file ${LOG_DIR}/${RC_SVCNAME}.log \
+	--config /etc/openvas/ospd.conf"
+command_user="${OSPD_USER}:${OSPD_GROUP}"
+
+depend() {
+	after bootmisc
+	need localmount redis
+}
+
+start_pre() {
+  checkpath -d -o "${OSPD_USER}:${OSPD_GROUP}" -m775 "${RUN_DIR}"
+  checkpath -d -o "${OSPD_USER}:${OSPD_GROUP}" -m775 "${LOG_DIR}"
+}

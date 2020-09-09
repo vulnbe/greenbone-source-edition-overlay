@@ -1,0 +1,27 @@
+#!/sbin/openrc-run
+# Copyright 1999-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+: ${GSAD_USER:=gvm}
+: ${GSAD_GROUP:=gvm}
+: ${GSAD_TIMEOUT:=30}
+
+RUN_DIR="/var/run/${GSAD_USER}"
+LOG_DIR="/var/log/${GSAD_USER}"
+
+name="Greenbone Security Assistant (GSA)"
+command="/usr/bin/gsad"
+command_args="--no-redirect --drop-privileges=${GSAD_USER} ${GSAD_OPTIONS}"
+command_background="true"
+pidfile="/var/lib/${GSAD_USER}/gsad.pid"
+retry="${GSAD_TIMEOUT}"
+
+depend() {
+  after bootmisc
+  need localmount net gvmd
+}
+
+start_pre() {
+	checkpath -d -o "${GSAD_USER}:${GSAD_GROUP}" -m775 "${RUN_DIR}"
+  checkpath -d -o "${GSAD_USER}:${GSAD_GROUP}" -m775 "${LOG_DIR}"
+}
