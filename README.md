@@ -21,7 +21,7 @@ Copy `greenbone-source-edition-overlay.conf` from this repository into /etc/port
 Then run:
 
 sync repo           --> `emerge --sync or eix-sync or emaint -a sync`
-install metapackage --> `emerge --ask net-analyzer/gse[openvas,gsa,c]`
+install metapackage --> `emerge --ask net-analyzer/gse[openvas,gsa,cron,extras,-ldap,-radius]`
 
 ### via layman
 
