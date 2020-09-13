@@ -11,7 +11,7 @@ HOMEPAGE="https://www.greenbone.net/en/"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
-IUSE="+cron +extras +gsa +openvas ldap radius"
+IUSE="+cron +gsa +openvas extras ldap radius"
 
 RDEPEND="
 	=net-analyzer/gvm-libs-${PV}[extras?,ldap?,radius?]
