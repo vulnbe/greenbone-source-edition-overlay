@@ -26,7 +26,7 @@ install metapackage --> `emerge --ask net-analyzer/gse[openvas,gsa,cron,extras,-
 ### via layman
 
 ```
-layman -o https://raw.github.com/vulnbe/greenbone-source-edition-gentoo-overlay/master/repositories.xml -f -a greenbone-source-edition-overlay
+layman -o https://raw.github.com/vulnbe/greenbone-source-edition-overlay/master/repositories.xml -f -a greenbone-source-edition-overlay
 ```
 
 Then run:
