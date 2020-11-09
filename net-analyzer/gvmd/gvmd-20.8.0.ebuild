@@ -44,6 +44,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${P}-restore-v9.patch
+  "${FILESDIR}"/${P}-glibc.patch
 )
 
 src_prepare() {
