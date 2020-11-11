@@ -23,5 +23,6 @@ depend() {
 
 start_pre() {
 	checkpath -d -o "${GSAD_USER}:${GSAD_GROUP}" -m775 "${RUN_DIR}"
-  checkpath -d -o "${GSAD_USER}:${GSAD_GROUP}" -m775 "${LOG_DIR}"
+	checkpath -d -o "${GSAD_USER}:${GSAD_GROUP}" -m775 "${LOG_DIR}"
+	checkpath -f -o "${GSAD_USER}:${GSAD_GROUP}" -m775 "${LOG_DIR}"/gsad.log
 }

@@ -24,6 +24,7 @@ DEPEND="
 	dev-libs/libgcrypt:=
 	dev-libs/libksba
 	net-analyzer/net-snmp
+	net-analyzer/nmap
 	net-libs/gnutls:=[tools]
 	net-libs/libpcap
 	net-libs/libssh:="
