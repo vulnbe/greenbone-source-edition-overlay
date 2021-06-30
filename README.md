@@ -22,7 +22,7 @@ Then run:
 
 ```
 emerge --sync or eix-sync or emaint -a sync
-emerge --ask net-analyzer/gse[openvas,gsa,cron,extras,-ldap,-radius]
+emerge --ask net-analyzer/gse-20.8.2[openvas,gsa,cron,extras,-ldap,-radius]
 ```
 
 ### via layman
