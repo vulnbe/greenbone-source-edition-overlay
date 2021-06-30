@@ -20,8 +20,10 @@ Copy `greenbone-source-edition-overlay.conf` from this repository into /etc/port
 
 Then run:
 
-sync repo           --> `emerge --sync or eix-sync or emaint -a sync`
-install metapackage --> `emerge --ask net-analyzer/gse[openvas,gsa,cron,extras,-ldap,-radius]`
+```
+emerge --sync or eix-sync or emaint -a sync
+emerge --ask net-analyzer/gse-20.8.2[openvas,gsa,cron,extras,-ldap,-radius]
+```
 
 ### via layman
 
@@ -56,7 +58,7 @@ sudo -u gvm gvm-manage-certs -a
 emerge --config dev-db/postgresql:12
 
 sudo -u postgres bash -c "createuser -DRS gvm; createdb -O gvm gvmd"
-sudo -u postgres psql gvmd -c 'create role dba with superuser noinherit; grant dba to gvm; create extension "uuid-ossp"; create extension "pgcrypto";'
+sudo -u postgres psql gvmd -c 'create role dba with superuser noinherit; grant dba to gvm; create extension "uuid-ossp"; create extension "pgcrypto"; create extension "pg-gvm";'
 ```
 
 [Read more](https://github.com/greenbone/gvmd/blob/master/INSTALL.md#configure-postgresql-database-backend)
