@@ -14,9 +14,10 @@ LICENSE="GPL-2 GPL-2+"
 KEYWORDS="~amd64 ~x86"
 IUSE="cron extras test"
 RESTRICT="!test? ( test )"
+MVER="21.0.0"
 
 DEPEND="
-  =net-analyzer/gvm-libs-${PV}
+	>=net-analyzer/gvm-libs-${MVER}
 	net-misc/rsync
 	app-crypt/gpgme:=
 	dev-db/redis
@@ -68,7 +69,7 @@ src_prepare() {
 }
 
 src_configure() {
-  CMAKE_BUILD_TYPE=Release
+	CMAKE_BUILD_TYPE=Release
 	local mycmakeargs=(
 		"-DLOCALSTATEDIR=${EPREFIX}/var"
 		"-DSYSCONFDIR=${EPREFIX}/etc"
@@ -113,11 +114,11 @@ src_install() {
 	keepdir /var/{log,run}/gvm
 	fowners gvm:gvm /var/{log,run}/gvm
 
-  keepdir /var/lib/openvas/{gnupg,plugins}
+	keepdir /var/lib/openvas/{gnupg,plugins}
 	fowners -R gvm:gvm /var/lib/openvas
 
 	insinto /etc/openvas
 	doins "${FILESDIR}/openvas.conf"
 
-  keepdir /var/cache/openvas
+	keepdir /var/cache/openvas
 }

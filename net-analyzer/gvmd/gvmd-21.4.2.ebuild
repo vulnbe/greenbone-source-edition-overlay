@@ -15,9 +15,10 @@ LICENSE="GPL-2+"
 KEYWORDS="~amd64 ~x86"
 IUSE="extras test"
 RESTRICT="!test? ( test )"
+MVER="21.0.0"
 
 DEPEND="
-	=net-analyzer/gvm-libs-21.4.1
+	>=net-analyzer/gvm-libs-${MVER}
 	dev-db/postgresql:*[uuid]
 	dev-libs/libgcrypt:0=
 	dev-libs/libical
@@ -42,11 +43,6 @@ BDEPEND="
 	)
 	test? ( dev-libs/cgreen )"
 
-#PATCHES=(
-#	"${FILESDIR}"/${P}-restore-v9.patch
-#	"${FILESDIR}"/${P}-glibc.patch
-#)
-
 src_prepare() {
 	cmake_src_prepare
 	# QA-Fix | Use correct FHS/Gentoo policy paths for 9.0.0
@@ -68,14 +64,16 @@ src_prepare() {
 }
 
 src_configure() {
-  CMAKE_BUILD_TYPE=Release
+	CMAKE_BUILD_TYPE=Release
 	local mycmakeargs=(
 		"-DLOCALSTATEDIR=${EPREFIX}/var"
 		"-DSYSCONFDIR=${EPREFIX}/etc"
+		"-DDEFAULT_CONFIG_DIR=${EPREFIX}/etc/default"
+		"-DLOGROTATE_DIR=${EPREFIX}/etc/logrotate.d"
 		"-DLIBDIR=${EPREFIX}/usr/$(get_libdir)"
 		"-DSBINDIR=${EPREFIX}/usr/bin"
-    "-DGVM_RUN_DIR=${EPREFIX}/var/run/gvm"
-    "-DOPENVAS_DEFAULT_SOCKET=${EPREFIX}/var/run/gvm/ospd-openvas.sock"
+		"-DGVM_RUN_DIR=${EPREFIX}/var/run/gvm"
+		"-DOPENVAS_DEFAULT_SOCKET=${EPREFIX}/var/run/gvm/ospd-openvas.sock"
 	)
 	cmake_src_configure
 }

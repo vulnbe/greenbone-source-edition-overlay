@@ -24,10 +24,6 @@ RDEPEND="
 DEPEND="
 	${RDEPEND}"
 
-#PATCHES=(
-#	"${FILESDIR}"/${P}-fix-tests.patch
-#)
-
 distutils_enable_tests unittest
 
 python_compile() {

@@ -66,7 +66,7 @@ src_prepare() {
 }
 
 src_configure() {
-  CMAKE_BUILD_TYPE=Release
+	CMAKE_BUILD_TYPE=Release
 	local mycmakeargs=(
 		"-DLOCALSTATEDIR=${EPREFIX}/var"
 		"-DSYSCONFDIR=${EPREFIX}/etc"

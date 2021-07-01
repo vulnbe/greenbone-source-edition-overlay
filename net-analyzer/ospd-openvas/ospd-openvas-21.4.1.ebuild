@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8,9} )
+PYTHON_COMPAT=( python3_{7,8,9,10} )
 DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1 systemd
 
@@ -16,19 +16,20 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="cron extras test"
 RESTRICT="!test? ( test )"
+MVER="21.0.0"
 
 DEPEND="
-  =net-analyzer/ospd-${PV}[${PYTHON_USEDEP}]
+	>=net-analyzer/ospd-${MVER}[${PYTHON_USEDEP}]
 	dev-python/packaging[${PYTHON_USEDEP}]
 	dev-python/psutil[${PYTHON_USEDEP}]
 	dev-python/redis-py[${PYTHON_USEDEP}]
-  dev-python/deprecated[${PYTHON_USEDEP}]
+	dev-python/deprecated[${PYTHON_USEDEP}]
 "
 RDEPEND="
+	>=net-analyzer/openvas-scanner-${MVER}[cron?,extras?,test?]
 	${DEPEND}
-  acct-user/gvm
-	=net-analyzer/openvas-scanner-${PV}[cron?,extras?,test?]
-  app-admin/sudo"
+	acct-user/gvm
+	app-admin/sudo"
 BDEPEND=""
 
 distutils_enable_tests unittest
@@ -45,7 +46,7 @@ python_install() {
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
 	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
 
-  # add sudoers definitions for user gvm
+	# add sudoers definitions for user gvm
 	insinto /etc/sudoers.d/
 	insopts -m 0600 -o root -g root
 	doins "${FILESDIR}/gvm-sudoers"

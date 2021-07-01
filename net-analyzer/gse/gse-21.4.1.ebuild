@@ -12,12 +12,13 @@ SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
 IUSE="+cron +gsa +openvas extras ldap radius"
+MVER="21.0.0"
 
 RDEPEND="
-	=net-analyzer/gvm-libs-${PV}[extras?,ldap?,radius?]
-	=net-analyzer/gvmd-21.4.2[extras?]
-	gsa? ( =net-analyzer/greenbone-security-assistant-${PV}[extras?] )
-	openvas? ( =net-analyzer/ospd-openvas-${PV}[cron?,extras?] )"
+	>=net-analyzer/gvm-libs-${MVER}[extras?,ldap?,radius?]
+	>=net-analyzer/gvmd-${MVER}[extras?]
+	gsa? ( >=net-analyzer/greenbone-security-assistant-${MVER}[extras?] )
+	openvas? ( >=net-analyzer/ospd-openvas-${MVER}[cron?,extras?] )"
 
 pkg_postinst() {
 	elog "Additional support for extra checks can be get from"
