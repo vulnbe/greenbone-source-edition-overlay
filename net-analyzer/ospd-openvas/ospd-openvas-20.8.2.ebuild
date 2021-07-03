@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8,9,10} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 DISTUTILS_USE_SETUPTOOLS=rdepend
 inherit distutils-r1 systemd
 
@@ -45,7 +45,7 @@ python_install() {
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
 	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
 
-  # add sudoers definitions for user gvm
+	# add sudoers definitions for user gvm
 	insinto /etc/sudoers.d/
 	insopts -m 0600 -o root -g root
 	doins "${FILESDIR}/gvm-sudoers"

@@ -21,7 +21,7 @@ Copy `greenbone-source-edition-overlay.conf` from this repository into /etc/port
 Then run:
 
 ```
-emerge --sync or eix-sync or emaint -a sync
+emerge --sync # or eix-sync or emaint -a sync
 emerge --ask net-analyzer/gse-21.4.1[openvas,gsa,cron,extras,-ldap,-radius]
 ```
 

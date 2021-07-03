@@ -19,7 +19,8 @@ MVER="21.0.0"
 
 DEPEND="
 	>=net-analyzer/gvm-libs-${MVER}
-	dev-db/postgresql:*[uuid]
+	net-analyzer/pg-gvm
+	>=dev-db/postgresql-9.6[uuid]
 	dev-libs/libgcrypt:0=
 	dev-libs/libical
 	net-libs/gnutls:=[tools]
