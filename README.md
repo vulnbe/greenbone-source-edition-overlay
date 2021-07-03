@@ -139,3 +139,4 @@ sudo -u postgres psql gvmd -c 'alter role gvm nosuperuser;'
 ```
 
 - If you are also upgrading gvm, make sure you run `sudo -u gvm gvmd -m`
+- If you get errors like `gvmd: database is wrong version`, you should run `sudo -u gvm -- gvmd --migrate`
