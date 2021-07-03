@@ -39,12 +39,12 @@ layman -s greenbone-source-edition-overlay
 
 ## Use Flags
 
-gsa - Greenbone Security Assistant (WebUI)
-openvas - OSPD OpenVAS scanner
-cron - A cron job to update GSE's vulnerability feeds daily
-extras - Extra fonts, pdf-results! and html docs support
-ldap - LDAP support
-radius - Radius support
+* gsa - Greenbone Security Assistant (WebUI)
+* openvas - OSPD OpenVAS scanner
+* cron - A cron job to update GSE's vulnerability feeds daily
+* extras - Extra fonts, pdf-results! and html docs support
+* ldap - LDAP support
+* radius - Radius support
 
 ## Certificates provision
 
