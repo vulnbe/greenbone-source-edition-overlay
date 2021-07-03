@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>a@vuln.be</email>
+		<name>Alexey Pronin</name>
+	</maintainer>
+	<use>
+	</use>
+	<longdescription lang="en">
+	This is the Postgres libraries module for the Greenbone Vulnerability Management Solution.
+	It is used for the Greenbone Security Manager appliances and provides various 
+	functionalities to support the integrated service daemons.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">greenbone/pg-gvm</remote-id>
+	</upstream>
+</pkgmetadata>

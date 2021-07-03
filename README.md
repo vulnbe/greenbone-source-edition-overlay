@@ -21,7 +21,7 @@ Copy `greenbone-source-edition-overlay.conf` from this repository into /etc/port
 Then run:
 
 ```
-emerge --sync or eix-sync or emaint -a sync
+emerge --sync # or eix-sync or emaint -a sync
 emerge --ask net-analyzer/gse-21.4.1[openvas,gsa,cron,extras,-ldap,-radius]
 ```
 
@@ -39,12 +39,12 @@ layman -s greenbone-source-edition-overlay
 
 ## Use Flags
 
-gsa - Greenbone Security Assistant (WebUI)
-openvas - OSPD OpenVAS scanner
-cron - A cron job to update GSE's vulnerability feeds daily
-extras - Extra fonts, pdf-results! and html docs support
-ldap - LDAP support
-radius - Radius support
+* gsa - Greenbone Security Assistant (WebUI)
+* openvas - OSPD OpenVAS scanner
+* cron - A cron job to update GSE's vulnerability feeds daily
+* extras - Extra fonts, pdf-results! and html docs support
+* ldap - LDAP support
+* radius - Radius support
 
 ## Certificates provision
 
@@ -139,3 +139,4 @@ sudo -u postgres psql gvmd -c 'alter role gvm nosuperuser;'
 ```
 
 - If you are also upgrading gvm, make sure you run `sudo -u gvm gvmd -m`
+- If you get errors like `gvmd: database is wrong version`, you should run `sudo -u gvm -- gvmd --migrate`
