@@ -25,9 +25,10 @@ DEPEND="
 	dev-libs/libical
 	net-libs/gnutls:=[tools]
 	dev-libs/libxslt
-	extras?   (
+	extras? (
 		app-text/xmlstarlet
-		dev-texlive/texlive-latexextra )"
+		dev-texlive/texlive-latexextra
+		dev-perl/XML-Twig )"
 
 RDEPEND="
 	${DEPEND}
